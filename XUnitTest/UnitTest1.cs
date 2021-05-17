@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using SwaggerApiNet5.Controllers;
 using Xunit;
@@ -24,13 +25,16 @@ namespace XUnitTest
             if (okResult.Value == null) return;
             var json = JsonConvert.SerializeObject(okResult.Value);
             var values = JsonConvert.DeserializeObject<Product>(json);
-            if (values != null) Assert.Equal(1, values.Id);
+            if (values == null) return;
+            Assert.Equal(1, values.Id);
+            Assert.True(values.IsAdmin);
         }
 
         public class Product
         {
             public int Id { get; set; }
             public string Name { get; set; }
+            public bool IsAdmin { get; set; }
         }
     }
 }
