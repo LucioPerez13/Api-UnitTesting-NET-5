@@ -12,12 +12,21 @@ namespace XUnitTest
         {
             var controller = new ProductController();
             var result = controller.Products();
+            Assert.IsType<OkObjectResult>(result);
+        }
+
+        [Fact]
+        public void Test2()
+        {
+            var controller = new ProductController();
+            var result = controller.Products();
             var okResult = Assert.IsType<OkObjectResult>(result);
             if (okResult.Value == null) return;
             var json = JsonConvert.SerializeObject(okResult.Value);
             var values = JsonConvert.DeserializeObject<Product>(json);
             if (values != null) Assert.Equal(1, values.Id);
         }
+
         public class Product
         {
             public int Id { get; set; }

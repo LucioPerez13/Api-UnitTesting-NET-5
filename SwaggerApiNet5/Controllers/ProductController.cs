@@ -6,6 +6,7 @@ namespace SwaggerApiNet5.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
+        [HttpGet]
         public IActionResult Products() => Ok(new { Id = 1, Name = "Smartphone" });
     }
 }
